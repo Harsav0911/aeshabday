@@ -240,7 +240,7 @@ Happiest birthday to one n only that never be replace 😘😘🥰😋😋🤪 �
 
     <!-- Background music (soft romantic instrumental) -->
     <audio id="bgMusic" loop>
-        <source src="https://www.soundjay.com/misc/sounds/romantic-piano.mp3" type="audio/mpeg">
+        <source src="song3.mp3" type="audio/mpeg">
         <!-- Fallback for browsers that don't support the audio element -->
     </audio>
 
@@ -292,16 +292,36 @@ Happiest birthday to one n only that never be replace 😘😘🥰😋😋🤪 �
 
         // Background music (commented out since we can't access external audio files)
         // Uncomment and replace with your own audio file path
-        /*
-        window.addEventListener('load', () => {
-            const audio = document.getElementById('bgMusic');
-            audio.volume = 0.3;
-            audio.play().catch(e => {
-                // Autoplay might be blocked, user interaction needed
-                console.log('Autoplay blocked. User interaction required.');
+        
+     window.addEventListener('load', () => {
+    const audio = document.getElementById('bgMusic');
+    audio.volume = 0.10;
+    audio.play().catch(e => {
+        // Autoplay might be blocked, user interaction needed
+        console.log('Autoplay blocked. User interaction required.');
+    });
+});
+
+let musicStarted = false;
+
+    function startMusic() {
+        if (musicStarted) return;
+        const bgMusic = document.getElementById("bgMusic");
+        if (bgMusic) {
+            bgMusic.volume = 0.10;
+            bgMusic.play().then(() => {
+                musicStarted = true;
+                console.log("Message page music started");
+            }).catch(err => {
+                console.warn("Autoplay blocked on message.html:", err);
             });
-        });
-        */
+        }
+    }
+
+    // Trigger music on first interaction
+    ["click", "touchstart", "keydown"].forEach(eventType => {
+        document.body.addEventListener(eventType, startMusic, { once: true });
+    });
 
         // Add some interactive sparkles on mouse move
         document.addEventListener('mousemove', (e) => {
